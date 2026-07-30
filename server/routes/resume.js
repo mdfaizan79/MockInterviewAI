@@ -12,7 +12,8 @@ const storage = multer.diskStorage({
 
 const fileFilter = (_, file, cb) => {
 
-  // format. Allowing .doc made otherwise valid-looking uploads fail at parse.
+  // ONLY DOC AND PDF ARE ALLOWED
+
   const allowed = ['.pdf', '.docx']
   const ext = path.extname(file.originalname).toLowerCase()
   allowed.includes(ext) ? cb(null, true) : cb(new Error('Only PDF and DOCX files are supported'))
