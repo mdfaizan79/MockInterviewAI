@@ -3,8 +3,7 @@ import { generateTest, getSession, submitTest, getStatus } from '../controllers/
 
 const router = express.Router()
 router.post('/generate',              generateTest)
-// Fixed routes must come before the id matcher; otherwise "status" is
-
+// Fixed routes must come before the id matcher;
 
 router.get('/:sessionId/status',      getStatus)
 router.get('/:sessionId',             getSession)
