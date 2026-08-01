@@ -38,7 +38,8 @@ const ScoreRing = ({ pct, size = 140 }) => {
   )
 }
 
-// ── Q Card ─────────────────────────────────────────────────────
+// ── Q Card ───
+
 const QuestionReviewCard = ({ q, index }) => {
   const [open, setOpen] = useState(false)
 
@@ -58,7 +59,8 @@ const QuestionReviewCard = ({ q, index }) => {
 
   const scoreText = isCorrect ? '+1 point' : isPartial ? '~0.5 point' : '0 points'
 
-  // Extract code
+
+// Extract Code
   const codeMatch = q.question.match(/```[\s\S]*?```/)
   const questionText = q.question.replace(/```[\s\S]*?```/, '').trim()
   const codeContent  = codeMatch ? codeMatch[0].replace(/```\w*\n?/, '').replace(/```/, '') : null
@@ -279,6 +281,7 @@ export default function Results() {
   const radarData = catData.slice(0, 6).map(c => ({ subject: c.name, score: c.score }))
 
   // Filter questions
+  
   const filteredQs = questions.filter(q => {
     if (filter === 'correct')  return q.correct || q.partialScore >= 0.8
     if (filter === 'wrong')    return !q.correct && q.partialScore < 0.8
