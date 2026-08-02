@@ -290,7 +290,8 @@ export default function Test() {
       })
       setShowSubmit(false)
       setEvaluating(true)
-      // Poll for completion
+      
+      
       const poll = setInterval(async () => {
         try {
           const s = await testAPI.getStatus(sessionId)

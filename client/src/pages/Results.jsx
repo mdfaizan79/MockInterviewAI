@@ -281,7 +281,7 @@ export default function Results() {
   const radarData = catData.slice(0, 6).map(c => ({ subject: c.name, score: c.score }))
 
   // Filter questions
-  
+
   const filteredQs = questions.filter(q => {
     if (filter === 'correct')  return q.correct || q.partialScore >= 0.8
     if (filter === 'wrong')    return !q.correct && q.partialScore < 0.8
@@ -442,6 +442,7 @@ export default function Results() {
             </div>
           )}
         </motion.div>
+
 
         {/* ── SECTION 3 — Q&A Review ── */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
