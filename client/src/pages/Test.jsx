@@ -34,6 +34,7 @@ const QuestionCard = ({ q, userAnswer, onAnswer }) => {
   const diff = DIFF_STYLE[q.difficulty] || DIFF_STYLE.medium
 
   // Extract code block from question
+
   const codeMatch = q.question.match(/```[\s\S]*?```/)
   const questionText = q.question.replace(/```[\s\S]*?```/, '').trim()
   const codeContent  = codeMatch ? codeMatch[0].replace(/```\w*\n?/, '').replace(/```/, '') : null
@@ -115,7 +116,8 @@ const QuestionCard = ({ q, userAnswer, onAnswer }) => {
   )
 }
 
-// ── Submit Confirm Modal ───────────────────────────────────────
+// ── Submit Confirm Modal ─────────────────
+
 const SubmitModal = ({ answered, flagged, total, onCancel, onConfirm, submitting }) => (
   <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
@@ -150,7 +152,8 @@ const SubmitModal = ({ answered, flagged, total, onCancel, onConfirm, submitting
   </div>
 )
 
-// ── Evaluating Screen ──────────────────────────────────────────
+// ── Evaluating Screen ────
+
 const EvaluatingScreen = () => {
   const [step, setStep] = useState(0)
   const steps = [
@@ -187,7 +190,8 @@ const EvaluatingScreen = () => {
   )
 }
 
-// ── Main Test Page ─────────────────────────────────────────────
+// ── Main Test Page ──────────────
+
 export default function Test() {
   const { sessionId } = useParams()
   const navigate      = useNavigate()
@@ -291,7 +295,7 @@ export default function Test() {
       setShowSubmit(false)
       setEvaluating(true)
       
-      
+
       const poll = setInterval(async () => {
         try {
           const s = await testAPI.getStatus(sessionId)
