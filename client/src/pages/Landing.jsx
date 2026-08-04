@@ -77,7 +77,7 @@ export default function Landing() {
                 onClick={() => navigate('/upload')}
                 className="btn-primary text-lg px-8 py-4 flex items-center gap-2"
               >
-                🚀 Start My Mock Interview <ArrowRight className="w-5 h-5" />
+                 Start My Mock Interview <ArrowRight className="w-5 h-5" />
               </button>
               <button className="btn-ghost text-slate-500 flex items-center gap-2">
                 <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
@@ -89,6 +89,7 @@ export default function Landing() {
               </button>
             </div>
           </motion.div>
+
 
           {/* Floating demo card */}
           <motion.div
@@ -109,6 +110,7 @@ export default function Landing() {
                   <div className="text-xs text-slate-400">14/18 correct</div>
                 </div>
               </div>
+              
               {/* Fake bars */}
               {[
                 { label: 'React',      pct: 88, color: 'bg-blue-500' },
