@@ -480,6 +480,7 @@ export default function Results() {
           </div>
         </motion.div>
 
+
         {/* ── SECTION 4 — Improvement Plan ── */}
         {planLines.length > 0 && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}

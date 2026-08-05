@@ -110,7 +110,7 @@ export default function Landing() {
                   <div className="text-xs text-slate-400">14/18 correct</div>
                 </div>
               </div>
-              
+
               {/* Fake bars */}
               {[
                 { label: 'React',      pct: 88, color: 'bg-blue-500' },
@@ -242,6 +242,7 @@ export default function Landing() {
           </button>
         </div>
       </section>
+
 
       {/* Footer */}
       <footer className="py-8 px-4 border-t border-slate-100 text-center text-sm text-slate-400">

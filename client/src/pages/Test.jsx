@@ -20,7 +20,8 @@ const TYPE_LABEL = {
   code_output:  'Code Output',
 }
 
-// ── Question Card ──────────────────────────────────────────────
+// ── Question Card ────────────
+
 const QuestionCard = ({ q, userAnswer, onAnswer }) => {
   const [textVal, setTextVal] = useState(userAnswer || '')
 
