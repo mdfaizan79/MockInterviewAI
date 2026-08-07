@@ -12,6 +12,7 @@ const DIFF_STYLE = {
   medium: { label: 'Medium', cls: 'badge-medium' },
   hard:   { label: 'Hard',   cls: 'badge-hard' },
 }
+
 const TYPE_LABEL = {
   mcq:          'MCQ',
   true_false:   'True/False',
