@@ -219,7 +219,8 @@ const QuestionReviewCard = ({ q, index }) => {
   )
 }
 
-// ── Main Results Page ──────────────────────────────────────────
+// ── Main Results Page ─────────────────
+
 export default function Results() {
   const { sessionId } = useParams()
   const navigate      = useNavigate()
@@ -502,7 +503,7 @@ export default function Results() {
           </motion.div>
         )}
 
-        {/* ── CTA ── */}
+        {/*─ CTA ──*/}
         <div className="flex flex-wrap gap-3 pb-8">
           <button onClick={() => navigate('/upload')} className="btn-primary flex items-center gap-2">
             <RefreshCw className="w-4 h-4" /> Retake Same Test

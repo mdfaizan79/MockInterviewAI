@@ -13,7 +13,6 @@ const TECH_TAGS = [
   'CI/CD', 'Microservices', 'Kafka', 'Redis', 'Elasticsearch',
 ]
 
-
 const STEPS = [
   { icon: Upload,   color: 'bg-blue-100 text-blue-600',   title: 'Upload Resume',          desc: 'PDF or DOCX — AI reads your skills in seconds' },
   { icon: Brain,    color: 'bg-violet-100 text-violet-600', title: 'AI Generates Test',    desc: '10–20 personalized questions in your tech stack' },
