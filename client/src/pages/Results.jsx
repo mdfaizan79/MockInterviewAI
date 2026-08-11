@@ -218,9 +218,7 @@ const QuestionReviewCard = ({ q, index }) => {
     </div>
   )
 }
-
-// ── Main Results Page ──────────
-
+// Main Page
 
 export default function Results() {
   const { sessionId } = useParams()
