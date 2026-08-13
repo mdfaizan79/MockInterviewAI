@@ -218,6 +218,7 @@ const QuestionReviewCard = ({ q, index }) => {
     </div>
   )
 }
+
 // Main Page
 
 export default function Results() {
@@ -271,6 +272,7 @@ export default function Results() {
   const { percentage, totalScore, maxScore, categoryScores = {}, difficultyScores = {}, typeScores = {} } = results
 
   // Chart data
+  
   const catData = Object.entries(categoryScores)
     .map(([name, v]) => ({ name, score: v.pct, correct: v.correct, total: v.total }))
     .sort((a, b) => b.score - a.score)
