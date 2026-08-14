@@ -282,7 +282,7 @@ export default function Results() {
 
   const radarData = catData.slice(0, 6).map(c => ({ subject: c.name, score: c.score }))
 
-  // Filter questions
+// Question Filter
 
   const filteredQs = questions.filter(q => {
     if (filter === 'correct')  return q.correct || q.partialScore >= 0.8
