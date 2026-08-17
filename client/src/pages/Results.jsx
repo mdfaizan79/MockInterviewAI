@@ -271,7 +271,7 @@ export default function Results() {
   const { session, results, questions, improvementPlan, badges } = data
   const { percentage, totalScore, maxScore, categoryScores = {}, difficultyScores = {}, typeScores = {} } = results
 
-  // Chart data
+// Data Chart
   
   const catData = Object.entries(categoryScores)
     .map(([name, v]) => ({ name, score: v.pct, correct: v.correct, total: v.total }))
@@ -282,7 +282,7 @@ export default function Results() {
 
   const radarData = catData.slice(0, 6).map(c => ({ subject: c.name, score: c.score }))
 
-// Question Filer
+
   const filteredQs = questions.filter(q => {
     if (filter === 'correct')  return q.correct || q.partialScore >= 0.8
     if (filter === 'wrong')    return !q.correct && q.partialScore < 0.8
