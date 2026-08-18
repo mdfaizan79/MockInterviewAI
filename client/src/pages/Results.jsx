@@ -271,7 +271,6 @@ export default function Results() {
   const { session, results, questions, improvementPlan, badges } = data
   const { percentage, totalScore, maxScore, categoryScores = {}, difficultyScores = {}, typeScores = {} } = results
 
-// Data Chart
   
   const catData = Object.entries(categoryScores)
     .map(([name, v]) => ({ name, score: v.pct, correct: v.correct, total: v.total }))
