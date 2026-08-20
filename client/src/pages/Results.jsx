@@ -12,7 +12,8 @@ import {
 } from 'recharts'
 import { resultsAPI } from '../services/api'
 
-// ── Score Ring ─────────────────────────────────────────────────
+// Score Ring
+
 const ScoreRing = ({ pct, size = 140 }) => {
   const sw = 12
   const r  = (size - sw) / 2
@@ -272,7 +273,7 @@ export default function Results() {
   const { percentage, totalScore, maxScore, categoryScores = {}, difficultyScores = {}, typeScores = {} } = results
 
   //Chart Data
-  
+
   const catData = Object.entries(categoryScores)
     .map(([name, v]) => ({ name, score: v.pct, correct: v.correct, total: v.total }))
     .sort((a, b) => b.score - a.score)
@@ -281,7 +282,6 @@ export default function Results() {
     .map(([name, v]) => ({ name: name.charAt(0).toUpperCase() + name.slice(1), score: v.pct }))
 
   const radarData = catData.slice(0, 6).map(c => ({ subject: c.name, score: c.score }))
-
 
   const filteredQs = questions.filter(q => {
     if (filter === 'correct')  return q.correct || q.partialScore >= 0.8
