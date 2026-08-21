@@ -12,7 +12,6 @@ import {
 } from 'recharts'
 import { resultsAPI } from '../services/api'
 
-// Score Ring
 
 const ScoreRing = ({ pct, size = 140 }) => {
   const sw = 12
