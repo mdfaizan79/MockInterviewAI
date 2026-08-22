@@ -12,7 +12,6 @@ import {
 } from 'recharts'
 import { resultsAPI } from '../services/api'
 
-
 const ScoreRing = ({ pct, size = 140 }) => {
   const sw = 12
   const r  = (size - sw) / 2
@@ -38,7 +37,7 @@ const ScoreRing = ({ pct, size = 140 }) => {
   )
 }
 
-// ── Q Card ───
+//Question Card
 
 const QuestionReviewCard = ({ q, index }) => {
   const [open, setOpen] = useState(false)
