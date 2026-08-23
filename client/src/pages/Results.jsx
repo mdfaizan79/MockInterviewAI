@@ -37,8 +37,6 @@ const ScoreRing = ({ pct, size = 140 }) => {
   )
 }
 
-//Question Card
-
 const QuestionReviewCard = ({ q, index }) => {
   const [open, setOpen] = useState(false)
 
