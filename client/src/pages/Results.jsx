@@ -216,6 +216,8 @@ const QuestionReviewCard = ({ q, index }) => {
   )
 }
 
+// Main Page
+
 export default function Results() {
   const { sessionId } = useParams()
   const navigate      = useNavigate()
