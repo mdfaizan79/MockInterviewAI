@@ -82,7 +82,6 @@ const QuestionReviewCard = ({ q, index }) => {
           {open ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
         </div>
       </div>
-
       <AnimatePresence>
         {open && (
           <motion.div
@@ -266,8 +265,6 @@ export default function Results() {
 
   const { session, results, questions, improvementPlan, badges } = data
   const { percentage, totalScore, maxScore, categoryScores = {}, difficultyScores = {}, typeScores = {} } = results
-
-  //Chart Data
 
   const catData = Object.entries(categoryScores)
     .map(([name, v]) => ({ name, score: v.pct, correct: v.correct, total: v.total }))
