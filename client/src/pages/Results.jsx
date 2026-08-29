@@ -215,6 +215,7 @@ const QuestionReviewCard = ({ q, index }) => {
   )
 }
 
+//result
 
 export default function Results() {
   const { sessionId } = useParams()
@@ -262,7 +263,6 @@ export default function Results() {
       <p className="text-slate-500">Loading your results…</p>
     </div>
   )
-
   const { session, results, questions, improvementPlan, badges } = data
   const { percentage, totalScore, maxScore, categoryScores = {}, difficultyScores = {}, typeScores = {} } = results
 
