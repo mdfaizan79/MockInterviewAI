@@ -35,7 +35,6 @@ const QuestionCard = ({ q, userAnswer, onAnswer }) => {
 
   const diff = DIFF_STYLE[q.difficulty] || DIFF_STYLE.medium
 
-  // Extract code block from question
 
   const codeMatch = q.question.match(/```[\s\S]*?```/)
   const questionText = q.question.replace(/```[\s\S]*?```/, '').trim()
