@@ -35,7 +35,6 @@ const QuestionCard = ({ q, userAnswer, onAnswer }) => {
 
   const diff = DIFF_STYLE[q.difficulty] || DIFF_STYLE.medium
 
-
   const codeMatch = q.question.match(/```[\s\S]*?```/)
   const questionText = q.question.replace(/```[\s\S]*?```/, '').trim()
   const codeContent  = codeMatch ? codeMatch[0].replace(/```\w*\n?/, '').replace(/```/, '') : null
@@ -153,7 +152,6 @@ const SubmitModal = ({ answered, flagged, total, onCancel, onConfirm, submitting
   </div>
 )
 
-// ── Evaluating Screen ────
 
 const EvaluatingScreen = () => {
   const [step, setStep] = useState(0)
