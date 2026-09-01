@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import { resumeAPI, testAPI } from '../services/api'
 
-// ── Constants ──────────────────────────────────────────────────
+
 const STACKS = {
   '🔵 Frontend':  ['React', 'Vue', 'Angular', 'Next.js', 'HTML/CSS', 'TypeScript'],
   '🟢 Backend':   ['Node.js', 'Express', 'Django', 'FastAPI', 'Spring Boot', 'Go'],

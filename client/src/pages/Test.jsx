@@ -152,7 +152,6 @@ const SubmitModal = ({ answered, flagged, total, onCancel, onConfirm, submitting
   </div>
 )
 
-
 const EvaluatingScreen = () => {
   const [step, setStep] = useState(0)
   const steps = [
