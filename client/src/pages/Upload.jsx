@@ -42,7 +42,6 @@ const TONES = [
 const COUNTS = [10, 15, 20]
 const TIME_PER_Q = 90 
 
-//Upload 
 const UploadSection = ({ onParsed }) => {
   const [dragOver, setDragOver]   = useState(false)
   const [uploading, setUploading] = useState(false)
