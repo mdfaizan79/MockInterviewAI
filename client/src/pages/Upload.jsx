@@ -264,7 +264,6 @@ const UploadSection = ({ onParsed }) => {
   )
 }
 
-// ── Main Upload Page ───────────────────────────────────────────
 export default function Upload() {
   const navigate = useNavigate()
 
