@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   UploadCloud, FileText, CheckCircle, Loader2, X, Plus, ChevronRight,
-  Brain, User, Briefcase, GraduationCap, Wrench, Folder, Building2, AlertCircle
+  Brain, User, Briefcase, GraduationCap, Wrench, Folder, Building2, AlertCircle, ArrowLeft
 } from 'lucide-react'
 import { resumeAPI, testAPI } from '../services/api'
+import ThemeToggle from '../components/ThemeToggle'
 
 
 const STACKS = {
@@ -122,13 +123,16 @@ const UploadSection = ({ onParsed }) => {
       {!parsed ? (
         <>
           {/* Drop Zone */}
-          <div
+          <motion.div
+            whileHover={{ scale: 1.01 }}
             onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
             onDragLeave={() => setDragOver(false)}
             onDrop={onDrop}
             onClick={() => !uploading && inputRef.current?.click()}
             className={`relative border-2 border-dashed rounded-2xl p-10 text-center cursor-pointer transition-all duration-200 ${
-              dragOver ? 'border-primary-400 bg-primary-50' : 'border-slate-200 hover:border-primary-300 hover:bg-slate-50'
+              dragOver 
+                ? 'border-primary-400 bg-primary-50 dark:bg-primary-900/20' 
+                : 'border-slate-200 dark:border-slate-800 hover:border-primary-300 dark:hover:border-primary-700 hover:bg-slate-50 dark:hover:bg-slate-900/50'
             }`}
           >
             <input ref={inputRef} type="file" accept=".pdf,.docx" className="hidden"
@@ -140,11 +144,11 @@ const UploadSection = ({ onParsed }) => {
                 <div className="space-y-2 w-full max-w-sm mx-auto text-left">
                   {UPLOAD_STEPS.map((step, i) => (
                     <div key={i} className={`flex items-center gap-2 text-sm transition-all ${
-                      steps.includes(i) ? 'text-primary-700' : 'text-slate-300'
+                      steps.includes(i) ? 'text-primary-700 dark:text-primary-300' : 'text-slate-300 dark:text-slate-700'
                     }`}>
                       {steps.includes(i)
                         ? <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        : <div className="w-4 h-4 rounded-full border-2 border-slate-200 flex-shrink-0" />
+                        : <div className="w-4 h-4 rounded-full border-2 border-slate-200 dark:border-slate-800 flex-shrink-0" />
                       }
                       {step}
                     </div>
@@ -153,111 +157,117 @@ const UploadSection = ({ onParsed }) => {
               </div>
             ) : (
               <>
-                <FileText className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                <p className="text-lg font-semibold text-slate-700 mb-1">Drag & Drop Your Resume Here</p>
-                <p className="text-sm text-slate-400 mb-4">Supports: PDF, DOCX (Max: 5MB)</p>
-                <div className="flex items-center gap-3 justify-center">
-                  <div className="h-px bg-slate-200 flex-1" />
-                  <span className="text-xs text-slate-400">or</span>
-                  <div className="h-px bg-slate-200 flex-1" />
+                <div className="w-16 h-16 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center mx-auto mb-4">
+                   <UploadCloud className="w-8 h-8 text-primary-500" />
                 </div>
-                <button className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-xl text-sm font-medium hover:bg-primary-700 transition-colors">
-                  <UploadCloud className="w-4 h-4" /> Browse Files
+                <p className="text-lg font-bold text-slate-700 dark:text-slate-200 mb-1">Drag & Drop Your Resume Here</p>
+                <p className="text-sm text-slate-400 dark:text-slate-500 mb-6">Supports: PDF, DOCX (Max: 5MB)</p>
+                <div className="flex items-center gap-3 justify-center max-w-xs mx-auto">
+                  <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
+                  <span className="text-xs text-slate-400 uppercase tracking-widest font-bold">or</span>
+                  <div className="h-px bg-slate-200 dark:bg-slate-800 flex-1" />
+                </div>
+                <button className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 rounded-xl text-sm font-bold hover:shadow-lg transition-all">
+                   Browse Files
                 </button>
               </>
             )}
-          </div>
+          </motion.div>
 
           {error && (
-            <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-100 rounded-xl p-3">
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+              className="flex items-center gap-2 text-red-600 dark:text-red-400 text-sm bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 rounded-xl p-4">
               <AlertCircle className="w-4 h-4 flex-shrink-0" /> {error}
-            </div>
+            </motion.div>
           )}
         </>
       ) : (
         /* Parsed Resume Card */
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5">
-          <div className="flex items-center gap-2 text-green-700 font-semibold mb-4">
-            <CheckCircle className="w-5 h-5" /> Resume Analyzed Successfully
+        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/10 dark:to-teal-900/10 border border-emerald-200 dark:border-emerald-900/50 rounded-2xl p-6 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+             <CheckCircle className="w-24 h-24 text-emerald-600" />
           </div>
-
-          <div className="grid grid-cols-2 gap-3 mb-4">
-            {parsed.name && (
-              <div className="flex items-center gap-2 text-sm">
-                <User className="w-4 h-4 text-slate-400" />
-                <span className="text-slate-700 font-medium">{parsed.name}</span>
-              </div>
-            )}
-            {parsed.experience && (
-              <div className="flex items-center gap-2 text-sm">
-                <Briefcase className="w-4 h-4 text-slate-400" />
-                <span className="text-slate-700">{parsed.experience}</span>
-              </div>
-            )}
-            {parsed.education && (
-              <div className="col-span-2 flex items-start gap-2 text-sm">
-                <GraduationCap className="w-4 h-4 text-slate-400 flex-shrink-0 mt-0.5" />
-                <span className="text-slate-700">{parsed.education}</span>
-              </div>
-            )}
-            <div className="flex items-center gap-2 text-sm">
-              <Folder className="w-4 h-4 text-slate-400" />
-              <span className="text-slate-700">{parsed.projects || 0} projects</span>
+          
+          <div className="relative">
+            <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-bold mb-5">
+              <CheckCircle className="w-5 h-5" /> Resume Analyzed Successfully
             </div>
-            {parsed.companies?.length > 0 && (
-              <div className="flex items-center gap-2 text-sm">
-                <Building2 className="w-4 h-4 text-slate-400" />
-                <span className="text-slate-700">{parsed.companies.join(', ')}</span>
-              </div>
-            )}
-          </div>
 
-          <div className="mb-3">
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
-                <Wrench className="w-3.5 h-3.5" /> Skills Detected ({parsed.skills?.length || 0})
-              </p>
-              <button
-                onClick={() => setEditSkills(e => !e)}
-                className="text-xs text-primary-600 hover:underline"
-              >
-                {editSkills ? 'Done' : '✏️ Edit Skills'}
-              </button>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {parsed.skills?.map(skill => (
-                <span key={skill} className="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-green-200 text-green-700 text-xs rounded-full">
-                  {skill}
-                  {editSkills && (
-                    <button onClick={() => removeSkill(skill)} className="hover:text-red-500">
-                      <X className="w-3 h-3" />
-                    </button>
-                  )}
-                </span>
-              ))}
-              {editSkills && (
-                <div className="inline-flex items-center gap-1">
-                  <input
-                    value={newSkill}
-                    onChange={e => setNewSkill(e.target.value)}
-                    onKeyDown={e => e.key === 'Enter' && addSkill()}
-                    placeholder="Add skill…"
-                    className="w-24 text-xs px-2 py-1 border border-slate-200 rounded-full focus:outline-none focus:border-primary-400"
-                  />
-                  <button onClick={addSkill} className="text-primary-600 hover:text-primary-700">
-                    <Plus className="w-4 h-4" />
-                  </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              {parsed.name && (
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                    <User className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <span className="text-slate-700 dark:text-slate-300 font-bold">{parsed.name}</span>
+                </div>
+              )}
+              {parsed.experience && (
+                <div className="flex items-center gap-3 text-sm">
+                   <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+                    <Briefcase className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <span className="text-slate-700 dark:text-slate-300">{parsed.experience}</span>
+                </div>
+              )}
+              {parsed.education && (
+                <div className="sm:col-span-2 flex items-start gap-3 text-sm">
+                   <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0">
+                    <GraduationCap className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <span className="text-slate-700 dark:text-slate-300 leading-relaxed">{parsed.education}</span>
                 </div>
               )}
             </div>
-          </div>
 
-          <button
-            onClick={() => { setParsed(null); setSteps([]); onParsed(null) }}
-            className="text-xs text-slate-400 hover:text-red-500 transition-colors"
-          >
-            × Upload a different resume
-          </button>
+            <div className="mb-6">
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                  <Wrench className="w-3.5 h-3.5" /> Skills Detected ({parsed.skills?.length || 0})
+                </p>
+                <button
+                  onClick={() => setEditSkills(e => !e)}
+                  className="text-xs font-bold text-primary-600 dark:text-primary-400 hover:underline"
+                >
+                  {editSkills ? 'Save Changes' : '✏️ Edit Skills'}
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {parsed.skills?.map(skill => (
+                  <span key={skill} className="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900 border border-emerald-100 dark:border-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold rounded-xl shadow-sm">
+                    {skill}
+                    {editSkills && (
+                      <button onClick={() => removeSkill(skill)} className="hover:text-red-500 transition-colors">
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </span>
+                ))}
+                {editSkills && (
+                  <div className="inline-flex items-center gap-2 px-2 py-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+                    <input
+                      autoFocus
+                      value={newSkill}
+                      onChange={e => setNewSkill(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && addSkill()}
+                      placeholder="Add skill…"
+                      className="w-24 text-xs bg-transparent focus:outline-none"
+                    />
+                    <button onClick={addSkill} className="text-primary-600 hover:text-primary-700">
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <button
+              onClick={() => { setParsed(null); setSteps([]); onParsed(null) }}
+              className="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-red-500 transition-colors uppercase tracking-widest"
+            >
+              <X className="w-3.5 h-3.5" /> Change Resume
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -329,231 +339,201 @@ export default function Upload() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 page-enter">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-indigo-700 py-10 px-4">
-        <div className="max-w-6xl mx-auto">
-          <button onClick={() => navigate('/')} className="text-primary-200 hover:text-white text-sm mb-4 flex items-center gap-1">
-            ← Back
-          </button>
-          <h1 className="text-3xl font-bold text-white mb-2">Configure Your Mock Interview</h1>
-          <p className="text-primary-200">Upload your resume and customize your test experience</p>
+    <div className="min-h-screen bg-[#fcfcff] dark:bg-slate-950 transition-colors duration-300 overflow-x-hidden">
+       {/* Nav */}
+       <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <button onClick={() => navigate('/')} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors group">
+               <ArrowLeft className="w-5 h-5 text-slate-500 group-hover:text-primary-600 transition-colors" />
+            </button>
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-600 to-indigo-500 flex items-center justify-center">
+                <Brain className="w-3.5 h-3.5 text-white" />
+              </div>
+              <span className="font-bold text-slate-900 dark:text-white text-base">Setup Interview</span>
+            </div>
+          </div>
+          <ThemeToggle />
+        </div>
+      </nav>
+
+      {/* Hero Header */}
+      <div className="pt-24 pb-12 px-4 relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-64 bg-primary-500/5 blur-[120px] pointer-events-none" />
+        <div className="max-w-6xl mx-auto text-center relative">
+           <h1 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">
+             Ready to Start?
+           </h1>
+           <p className="text-slate-500 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+             Upload your resume and customize your test parameters. AI will handle the rest.
+           </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* LEFT — Resume Upload */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-primary-600" /> 1. Upload Your Resume
-              </h2>
-              <UploadSection onParsed={setResumeData} />
-            </div>
-
-            {/* Level — auto-detect from resume */}
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-3">2. Experience Level</h2>
-              <div className="grid grid-cols-2 gap-2">
-                {LEVELS.map(l => (
-                  <button
-                    key={l.id}
-                    onClick={() => setLevel(l.id)}
-                    className={`p-3 rounded-xl border-2 text-left transition-all ${
-                      level === l.id
-                        ? 'border-primary-500 bg-primary-50'
-                        : 'border-slate-200 bg-white hover:border-primary-200'
-                    }`}
-                  >
-                    <p className="font-semibold text-slate-900 text-sm">{l.label}</p>
-                    <p className="text-xs text-slate-500">{l.sub} · {l.desc}</p>
-                  </button>
-                ))}
-              </div>
-            </div>
+      <div className="max-w-6xl mx-auto px-4 pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* LEFT — Step Indicators (Desktop Only) */}
+          <div className="hidden lg:block lg:col-span-3 sticky top-24 space-y-8">
+             {[
+               { id: 1, label: 'Resume Analysis', active: !resumeData },
+               { id: 2, label: 'Tech Stack', active: resumeData && selectedStacks.length === 0 },
+               { id: 3, label: 'Configuration', active: selectedStacks.length > 0 },
+             ].map((s, i) => (
+               <div key={s.id} className="flex items-center gap-4 group">
+                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm transition-all shadow-sm ${
+                   s.active ? 'bg-primary-600 text-white shadow-primary-500/20' : 'bg-slate-100 dark:bg-slate-900 text-slate-400'
+                 }`}>
+                   {s.id}
+                 </div>
+                 <div className="flex flex-col">
+                   <span className={`text-xs font-bold uppercase tracking-widest transition-colors ${s.active ? 'text-primary-600' : 'text-slate-400'}`}>Step {s.id}</span>
+                   <span className={`font-bold text-sm transition-colors ${s.active ? 'text-slate-900 dark:text-white' : 'text-slate-400'}`}>{s.label}</span>
+                 </div>
+               </div>
+             ))}
           </div>
 
-          {/* RIGHT — Test Config */}
-          <div className="space-y-6">
-            {/* Tech Stacks */}
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-3">3. Select Tech Stack to Test On</h2>
-              <div className="space-y-3">
-                {Object.entries(STACKS).map(([category, techs]) => (
-                  <div key={category}>
-                    <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">{category}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {techs.map(tech => (
-                        <button
-                          key={tech}
-                          onClick={() => toggleStack(tech)}
-                          className={`px-3 py-1.5 rounded-lg text-sm font-medium border-2 transition-all ${
-                            selectedStacks.includes(tech)
-                              ? 'border-primary-500 bg-primary-50 text-primary-700'
-                              : 'border-slate-200 text-slate-600 hover:border-primary-200'
+          {/* MAIN CONTENT — 2 Column Grid */}
+          <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            {/* Resume & Level */}
+            <div className="space-y-8">
+              <section className="card p-6 border-transparent hover:border-primary-100 dark:hover:border-primary-900/50">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+                   <div className="w-10 h-10 rounded-xl bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center">
+                    <FileText className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                   </div>
+                   Resume Details
+                </h2>
+                <UploadSection onParsed={setResumeData} />
+              </section>
+
+              <section className="card p-6 border-transparent">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Experience Level</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {LEVELS.map(l => (
+                    <button
+                      key={l.id}
+                      onClick={() => setLevel(l.id)}
+                      className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                        level === l.id
+                          ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 shadow-lg shadow-primary-500/5'
+                          : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/50 hover:border-primary-200 dark:hover:border-primary-800'
+                      }`}
+                    >
+                      <p className={`font-bold text-sm mb-1 ${level === l.id ? 'text-primary-700 dark:text-primary-400' : 'text-slate-900 dark:text-white'}`}>{l.label}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{l.sub} · {l.desc}</p>
+                    </button>
+                  ))}
+                </div>
+              </section>
+            </div>
+
+            {/* Test Configuration */}
+            <div className="space-y-8">
+              <section className="card p-6 border-transparent">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                  <Wrench className="w-5 h-5 text-primary-600" /> Tech Stack to Test
+                </h2>
+                <div className="space-y-5">
+                  {Object.entries(STACKS).map(([category, techs]) => (
+                    <div key={category}>
+                      <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-3">{category}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {techs.map(tech => (
+                          <button
+                            key={tech}
+                            onClick={() => toggleStack(tech)}
+                            className={`px-3 py-2 rounded-xl text-xs font-bold border-2 transition-all ${
+                              selectedStacks.includes(tech)
+                                ? 'border-primary-500 bg-primary-600 text-white shadow-lg shadow-primary-500/20'
+                                : 'border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/50 text-slate-600 dark:text-slate-400 hover:border-primary-200 dark:hover:border-primary-800'
+                            }`}
+                          >
+                            {tech}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {selectedStacks.length > 0 && (
+                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-4 p-3 bg-primary-50 dark:bg-primary-900/20 rounded-xl border border-primary-100 dark:border-primary-800/50">
+                     <p className="text-xs font-bold text-primary-700 dark:text-primary-400">{selectedStacks.length} stack{selectedStacks.length > 1 ? 's' : ''} selected</p>
+                   </motion.div>
+                )}
+              </section>
+
+              {/* Advanced Config */}
+              <section className="card p-6 border-transparent space-y-6">
+                 <div className="flex items-center justify-between">
+                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">Test Settings</h2>
+                    <div className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-black text-slate-500 uppercase tracking-widest">Advanced</div>
+                 </div>
+
+                 {/* Question Count */}
+                 <div>
+                    <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Total Questions</p>
+                    <div className="flex gap-2">
+                      {COUNTS.map(c => (
+                        <button key={c} onClick={() => setQCount(c)}
+                          className={`flex-1 py-3 rounded-xl border-2 font-black transition-all ${
+                            qCount === c ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400' : 'border-slate-100 dark:border-slate-800 dark:bg-slate-900/50 text-slate-400'
                           }`}
                         >
-                          {selectedStacks.includes(tech) && '✓ '}{tech}
+                          {c}
                         </button>
                       ))}
                     </div>
-                  </div>
-                ))}
-              </div>
-              {selectedStacks.length > 0 && (
-                <p className="text-xs text-primary-600 mt-2">{selectedStacks.length} stack{selectedStacks.length > 1 ? 's' : ''} selected: {selectedStacks.join(', ')}</p>
-              )}
-            </div>
+                 </div>
 
-            {/* Question Count */}
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-3">4. Number of Questions</h2>
-              <div className="flex gap-3">
-                {COUNTS.map(c => (
-                  <button
-                    key={c}
-                    onClick={() => setQCount(c)}
-                    className={`flex-1 py-3 rounded-xl border-2 font-semibold transition-all ${
-                      qCount === c ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-slate-200 text-slate-600 hover:border-primary-200'
-                    }`}
+                 {/* Timer Toggle */}
+                 <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl">
+                    <div className="flex items-center gap-3">
+                       <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center shadow-sm">
+                          <Clock className={`w-5 h-5 ${timed ? 'text-primary-600' : 'text-slate-400'}`} />
+                       </div>
+                       <div>
+                          <p className="text-sm font-bold text-slate-900 dark:text-white">Enable Timer</p>
+                          <p className="text-xs text-slate-500">{timePerQ}s per question</p>
+                       </div>
+                    </div>
+                    <button onClick={() => setTimed(!timed)}
+                      className={`w-12 h-6 rounded-full transition-colors relative ${timed ? 'bg-primary-600' : 'bg-slate-300 dark:bg-slate-700'}`}>
+                       <motion.div animate={{ x: timed ? 26 : 2 }} className="absolute top-1 left-0 w-4 h-4 bg-white rounded-full shadow-md" />
+                    </button>
+                 </div>
+
+                 {genError && (
+                    <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/50 rounded-2xl flex items-start gap-3">
+                       <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                       <p className="text-xs font-bold text-red-600 dark:text-red-400 leading-relaxed">{genError}</p>
+                    </div>
+                 )}
+
+                 <button
+                    onClick={handleGenerate}
+                    disabled={generating || !resumeData || selectedStacks.length === 0}
+                    className="w-full py-5 bg-gradient-to-r from-primary-600 to-indigo-600 text-white font-black rounded-2xl text-lg
+                               hover:shadow-2xl hover:shadow-primary-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all
+                               disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3 shadow-xl shadow-primary-500/10"
                   >
-                    {c}
-                    <div className="text-xs font-normal text-slate-400">{Math.round(c * timePerQ / 60)} mins</div>
-                  </button>
-                ))}
-              </div>
+                    {generating ? (
+                      <>
+                        <Loader2 className="w-6 h-6 animate-spin" />
+                        <span>Crafting Test…</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Start Interview</span>
+                        <ChevronRight className="w-6 h-6" />
+                      </>
+                    )}
+                 </button>
+              </section>
             </div>
-
-            {/* Question Types */}
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-3">5. Question Types</h2>
-              <div className="space-y-2">
-                {Q_TYPES.map(qt => (
-                  <label key={qt.id} className="flex items-center gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={qTypes.includes(qt.id)}
-                      onChange={() => toggleType(qt.id)}
-                      className="w-4 h-4 text-primary-600 rounded border-slate-300 focus:ring-primary-500"
-                    />
-                    <span className="text-sm font-medium text-slate-700">{qt.label}</span>
-                    <span className="text-xs text-slate-400">— {qt.sub}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Difficulty */}
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-3">6. Difficulty Mix</h2>
-              <div className="grid grid-cols-3 gap-3">
-                {[
-                  { key: 'easy',   label: 'Easy',   color: 'text-green-600' },
-                  { key: 'medium', label: 'Medium', color: 'text-yellow-600' },
-                  { key: 'hard',   label: 'Hard',   color: 'text-red-600' },
-                ].map(d => (
-                  <div key={d.key}>
-                    <label className={`text-sm font-medium ${d.color} block mb-1`}>
-                      {d.label} {difficulty[d.key]}%
-                    </label>
-                    <input
-                      type="range" min={0} max={100} step={10}
-                      value={difficulty[d.key]}
-                      onChange={e => {
-                        const val = parseInt(e.target.value)
-                        // Keep total = 100
-                        const others = ['easy', 'medium', 'hard'].filter(k => k !== d.key)
-                        const remaining = 100 - val
-                        const split = Math.floor(remaining / 2)
-                        setDifficulty({ ...difficulty, [d.key]: val, [others[0]]: split, [others[1]]: remaining - split })
-                      }}
-                      className="w-full accent-primary-600"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Timer */}
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-3">7. Timer</h2>
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setTimed(false)}
-                  className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-medium transition-all ${
-                    !timed ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-slate-200 text-slate-600 hover:border-primary-200'
-                  }`}
-                >
-                  No Timer
-                </button>
-                <button
-                  onClick={() => setTimed(true)}
-                  className={`flex-1 py-2.5 rounded-xl border-2 text-sm font-medium transition-all ${
-                    timed ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-slate-200 text-slate-600 hover:border-primary-200'
-                  }`}
-                >
-                  Timed ({timePerQ}s/Q)
-                </button>
-              </div>
-              {timed && (
-                <div className="mt-3 flex items-center gap-3">
-                  <span className="text-sm text-slate-500">Seconds per question:</span>
-                  <select
-                    value={timePerQ}
-                    onChange={e => setTimePerQ(parseInt(e.target.value))}
-                    className="border border-slate-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  >
-                    {[45, 60, 90, 120, 180].map(v => <option key={v} value={v}>{v}s</option>)}
-                  </select>
-                  <span className="text-xs text-slate-400">Total: ~{Math.round(qCount * timePerQ / 60)} min</span>
-                </div>
-              )}
-            </div>
-
-            {/* Tone */}
-            <div>
-              <h2 className="text-lg font-bold text-slate-900 mb-3">8. Interview Tone</h2>
-              <div className="grid grid-cols-2 gap-2">
-                {TONES.map(t => (
-                  <button key={t.id} onClick={() => setTone(t.id)}
-                    className={`py-2.5 rounded-xl border-2 text-sm font-medium transition-all ${
-                      tone === t.id ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-slate-200 text-slate-600 hover:border-primary-200'
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {genError && (
-              <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 border border-red-100 rounded-xl p-3">
-                <AlertCircle className="w-4 h-4 flex-shrink-0" /> {genError}
-              </div>
-            )}
-
-            {/* Generate Button */}
-            <button
-              onClick={handleGenerate}
-              disabled={generating || !resumeData || selectedStacks.length === 0}
-              className="w-full py-4 bg-gradient-to-r from-primary-600 to-indigo-600 text-white font-bold rounded-2xl text-lg
-                         hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all
-                         disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
-            >
-              {generating ? (
-                <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                  <span>AI is crafting your questions… (~15 seconds)</span>
-                </>
-              ) : (
-                <>
-                  <Brain className="w-5 h-5" />
-                  Generate My Interview Test
-                  <ChevronRight className="w-5 h-5" />
-                </>
-              )}
-            </button>
           </div>
         </div>
       </div>
