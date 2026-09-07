@@ -278,10 +278,8 @@ const UploadSection = ({ onParsed }) => {
 export default function Upload() {
   const navigate = useNavigate()
 
-  // Resume data
+  
   const [resumeData, setResumeData] = useState(null)
-
-
   const [selectedStacks, setSelectedStacks] = useState([])
   const [level, setLevel]   = useState('junior')
   const [qCount, setQCount] = useState(10)
