@@ -227,7 +227,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-24 px-4 bg-gradient-to-br from-primary-600 via-indigo-600 to-violet-700 relative overflow-hidden">
          <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-mesh-gradient" />
         <div className="relative max-w-2xl mx-auto text-center">
