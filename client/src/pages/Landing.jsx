@@ -240,9 +240,9 @@ export default function Landing() {
           </button>
         </div>
       </section>
+      
+    // Footer 
 
-
-      {/* Footer */}
       <footer className="py-12 px-4 border-t border-slate-100 dark:border-slate-900 text-center text-sm text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2 opacity-60">
