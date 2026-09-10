@@ -208,7 +208,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Tech Stack Scroll */}
       <section className="py-16 bg-slate-50 dark:bg-slate-900/30 overflow-hidden transition-colors">
         <div className="text-center mb-8">
           <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-[0.2em]">Supported Tech Stacks</p>
@@ -240,8 +239,6 @@ export default function Landing() {
           </button>
         </div>
       </section>
-      
-    // Footer 
 
       <footer className="py-12 px-4 border-t border-slate-100 dark:border-slate-900 text-center text-sm text-slate-400 dark:text-slate-500 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
