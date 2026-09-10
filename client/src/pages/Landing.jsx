@@ -115,7 +115,6 @@ export default function Landing() {
                 </div>
               </div>
 
-              {/* Fake bars */}
               {[
                 { label: 'React',      pct: 88, color: 'bg-blue-500' },
                 { label: 'Node.js',    pct: 65, color: 'bg-green-500' },
@@ -140,7 +139,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* How it works */}
       <section className="py-24 px-4 bg-slate-50 dark:bg-slate-900/50 transition-colors">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
