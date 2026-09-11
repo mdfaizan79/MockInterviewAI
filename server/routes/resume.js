@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
 
 const fileFilter = (_, file, cb) => {
 
-  // ONLY DOC AND PDF ARE ALLOWED
 
   const allowed = ['.pdf', '.docx']
   const ext = path.extname(file.originalname).toLowerCase()
