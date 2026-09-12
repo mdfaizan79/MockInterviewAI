@@ -42,14 +42,12 @@ const QuestionCard = ({ q, userAnswer, onAnswer }) => {
 
   return (
     <div className="card p-6 lg:p-10 border-transparent shadow-2xl shadow-primary-500/5 transition-all">
-      {/* Meta */}
       <div className="flex items-center gap-2 mb-6 flex-wrap">
         <span className="badge bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold uppercase tracking-wider">{TYPE_LABEL[q.type] || q.type}</span>
         <span className={`badge ${diff.cls} font-bold uppercase tracking-wider`}>{diff.label}</span>
         {q.tech && <span className="badge badge-tech font-bold uppercase tracking-wider">{q.tech}</span>}
       </div>
 
-      {/* Question */}
       <h2 className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white leading-relaxed mb-8">
         {questionText}
       </h2>
