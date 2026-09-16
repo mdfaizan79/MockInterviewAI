@@ -57,7 +57,6 @@ const QuestionReviewCard = ({ q, index }) => {
   const scoreText = isCorrect ? '+1 point' : isPartial ? '~0.5 point' : '0 points'
 
 
-// Extract Code
   const codeMatch = q.question.match(/```[\s\S]*?```/)
   const questionText = q.question.replace(/```[\s\S]*?```/, '').trim()
   const codeContent  = codeMatch ? codeMatch[0].replace(/```\w*\n?/, '').replace(/```/, '') : null

@@ -338,7 +338,7 @@ export default function Upload() {
 
   return (
     <div className="min-h-screen bg-[#fcfcff] dark:bg-slate-950 transition-colors duration-300 overflow-x-hidden">
-       {/* Nav */}
+  
        <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-100 dark:border-slate-800">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
