@@ -55,8 +55,6 @@ const QuestionReviewCard = ({ q, index }) => {
       : <XCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
 
   const scoreText = isCorrect ? '+1 point' : isPartial ? '~0.5 point' : '0 points'
-
-
   const codeMatch = q.question.match(/```[\s\S]*?```/)
   const questionText = q.question.replace(/```[\s\S]*?```/, '').trim()
   const codeContent  = codeMatch ? codeMatch[0].replace(/```\w*\n?/, '').replace(/```/, '') : null
@@ -158,7 +156,6 @@ const QuestionReviewCard = ({ q, index }) => {
                 </div>
               )}
 
-              {/* Why others wrong (MCQ) */}
               {q.whyOthersWrong && Object.keys(q.whyOthersWrong).length > 0 && (
                 <div>
                   <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Why Other Options Are Wrong</p>
