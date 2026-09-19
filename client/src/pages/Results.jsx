@@ -155,7 +155,7 @@ const QuestionReviewCard = ({ q, index }) => {
                   <p className="text-sm text-slate-700 leading-relaxed bg-slate-50 rounded-xl p-3">{q.explanation}</p>
                 </div>
               )}
-
+              {/* Question Section*/}
               {q.whyOthersWrong && Object.keys(q.whyOthersWrong).length > 0 && (
                 <div>
                   <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Why Other Options Are Wrong</p>
