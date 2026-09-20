@@ -106,7 +106,7 @@ const QuestionReviewCard = ({ q, index }) => {
                   </div>
                 </div>
               </div>
-              {/* Short answer AI evaluation */}
+             
               {q.aiEvaluation && (
                 <div className="space-y-3">
                   {q.aiEvaluation.whatWasRight?.length > 0 && (
