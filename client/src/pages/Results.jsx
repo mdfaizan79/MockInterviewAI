@@ -90,8 +90,6 @@ const QuestionReviewCard = ({ q, index }) => {
           >
             <div className="bg-white border-t border-slate-100 p-5 space-y-4">
               {codeContent && <div className="code-block text-xs">{codeContent}</div>}
-
-              {/* Answers */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <p className="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Your Answer</p>
@@ -108,7 +106,6 @@ const QuestionReviewCard = ({ q, index }) => {
                   </div>
                 </div>
               </div>
-
               {/* Short answer AI evaluation */}
               {q.aiEvaluation && (
                 <div className="space-y-3">
