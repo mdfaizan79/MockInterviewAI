@@ -145,7 +145,6 @@ const QuestionReviewCard = ({ q, index }) => {
                 </div>
               )}
 
-              {/* Explanation */}
               {q.explanation && (
                 <div>
                   <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Detailed Explanation</p>
