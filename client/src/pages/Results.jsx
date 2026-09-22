@@ -166,7 +166,6 @@ const QuestionReviewCard = ({ q, index }) => {
                 </div>
               )}
 
-              {/* Real world context */}
               {q.realWorldContext && (
                 <div className="bg-amber-50 border border-amber-100 rounded-xl p-3">
                   <p className="text-xs font-semibold text-amber-700 mb-1">💡 Real-World Context</p>
