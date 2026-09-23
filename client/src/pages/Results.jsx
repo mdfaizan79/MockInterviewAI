@@ -173,7 +173,6 @@ const QuestionReviewCard = ({ q, index }) => {
                 </div>
               )}
 
-              {/* Topics & Resources */}
               {(q.topicsToStudy?.length > 0 || q.resources?.length > 0) && (
                 <div className="flex flex-wrap gap-4">
                   {q.topicsToStudy?.length > 0 && (
