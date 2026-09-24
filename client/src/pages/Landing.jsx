@@ -52,7 +52,6 @@ export default function Landing() {
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="relative pt-32 pb-24 px-4 overflow-hidden">
         {/* Background blobs */}
         <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary-200 dark:bg-primary-900/20 rounded-full blur-3xl opacity-60 pointer-events-none animate-aurora" />
