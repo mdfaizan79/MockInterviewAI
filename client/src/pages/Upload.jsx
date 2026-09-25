@@ -371,8 +371,7 @@ export default function Upload() {
 
       <div className="max-w-6xl mx-auto px-4 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* LEFT — Step Indicators (Desktop Only) */}
+
           <div className="hidden lg:block lg:col-span-3 sticky top-24 space-y-8">
              {[
                { id: 1, label: 'Resume Analysis', active: !resumeData },
