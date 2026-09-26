@@ -392,7 +392,6 @@ export default function Upload() {
              ))}
           </div>
 
-          {/* MAIN CONTENT — 2 Column Grid */}
           <div className="lg:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-8">
             
             {/* Resume & Level */}
